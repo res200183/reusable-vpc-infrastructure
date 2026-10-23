@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo "Checking AWS CLI version"
+      - aws --version
+
+  pre_build:
+    commands:
+      - echo "Validating CloudFormation network template"
+      - aws cloudformation validate-template --template-body file://infrastructure/network.yaml
+
+  build:
+    commands:
+      - echo "CloudFormation template validation completed successfully"
+
+artifacts:
+  files:
+    - infrastructure/network.yaml

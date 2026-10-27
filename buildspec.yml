@@ -1,3 +1,4 @@
+
 version: 0.2
 
 phases:
@@ -8,13 +9,15 @@ phases:
 
   pre_build:
     commands:
-      - echo "Validating CloudFormation network template"
+      - echo "Validating CloudFormation templates"
       - aws cloudformation validate-template --template-body file://infrastructure/network.yaml
+      - aws cloudformation validate-template --template-body file://infrastructure/ec2.yaml
 
   build:
     commands:
-      - echo "CloudFormation template validation completed successfully"
+      - echo "CloudFormation templates validated successfully"
 
 artifacts:
   files:
     - infrastructure/network.yaml
+    - infrastructure/ec2.yaml
